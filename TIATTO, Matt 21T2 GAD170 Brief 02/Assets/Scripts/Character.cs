@@ -67,7 +67,7 @@ public class Character : MonoBehaviour
     public bool isSelected; // This is used for determining if this character is selected in a battle.
 
     [SerializeField]
-    protected TMPro.TextMeshPro nickText; // This is just a piece of text in Unity,  to display the characters name.
+    protected TMPro.TextMeshPro nickText; // This is just a piece of text in Unity, to display the characters name.
  
     public AnimationController animController; // A reference to the animationController, is used to switch dancing states.
 
@@ -95,11 +95,11 @@ public class Character : MonoBehaviour
                 {
                     agility += 1;
                 }
-                else if (statAssign == 2)
+                if (statAssign == 2)
                 {
                     strength += 1;
                 }
-                else
+                if (statAssign == 3)
                 {
                     intelligence += 1;
                 }
@@ -147,6 +147,15 @@ public class Character : MonoBehaviour
     {
         // we probably want to do a check in here to see if the character is dead or not...
         // if they are we probably want to remove them from their team's active dancer list...sure wish there was a function in their dance team  script we could use for this.
+        mojoRemaining -= amount;
+        if (mojoRemaining <= 0)
+        {
+            int thisDancer = myTeam.activeDancers.IndexOf(this);
+
+            myTeam.RemoveDancerFromActive(myTeam.activeDancers[thisDancer]);
+
+            Debug.LogWarning(this.gameObject + " has died!");
+        }
     }
 
 /// <summary>
@@ -191,9 +200,9 @@ public class Character : MonoBehaviour
         
         currentXp -= xpThreshold;
         
-        xpThreshold += xpThreshold + (level * 5);
+        xpThreshold += xpThreshold + ((int)(level * 1.5));
         
-        DistributePhysicalStatsOnLevelUp((int)((float)level + 1));
+        DistributePhysicalStatsOnLevelUp((int)((float)level * 2));
 
         Debug.Log(this.gameObject.name + " | LevelUp | Level: " + level + " | CurrentXP: " + currentXp + " | XPThreshold: " + xpThreshold);
         if (currentXp >= xpThreshold)
@@ -218,11 +227,11 @@ public class Character : MonoBehaviour
                 {
                     agility += 1;
                 }
-                else if (statAssign == 2)
+                if (statAssign == 2)
                 {
                     strength += 1;
                 }
-                else
+                if (statAssign == 2)
                 {
                     intelligence += 1;
                 }

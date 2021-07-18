@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Functions to complete:
-/// - Remove From Active
-/// - Add Dancer
-/// </summary>
 public class DanceTeam : MonoBehaviour
 {
     public enum Direction : int { Left = -1, Right = 1 }; // An Enum used to hold Left and Right directions/determines which side of the screen dancers spawn in at.
@@ -27,8 +22,12 @@ public class DanceTeam : MonoBehaviour
     /// <param name="dancer"></param>
     public void AddNewDancer(Character dancer)
     {
-        Debug.LogWarning("AddNewDancer called, it needs to put dancer in both lists and set the dancers team.");
+        Debug.LogWarning(this.gameObject + " | AddNewDancer called | " + dancer.gameObject);
         // we probably want to add our new dancers to our all dancers and our active dancers lists here..
+
+        allDancers.Add(dancer);
+
+        activeDancers.Add(dancer);
     }
 
     /// <summary>
@@ -37,9 +36,11 @@ public class DanceTeam : MonoBehaviour
     /// <param name="dancer"></param>
     public void RemoveDancerFromActive(Character dancer)
     {
-        Debug.LogWarning("RemoveFromActive called, it needs to take the dancer out of the active dancers list");  
+        Debug.LogWarning(this.gameObject + " | RemoveFromActive called | " + dancer.gameObject);
         // This gets called when our team mate dies :(
         // We probably want to remove the dancer passed in from our active dancer list.
+        activeDancers.Remove(dancer);
+        dancer.gameObject.SetActive(false);
     }
 
     /// <summary>

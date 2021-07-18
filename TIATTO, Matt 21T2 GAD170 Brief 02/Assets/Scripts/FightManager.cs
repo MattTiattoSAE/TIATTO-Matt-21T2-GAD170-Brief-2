@@ -11,6 +11,8 @@ public class FightManager : MonoBehaviour
 {
     public BattleSystem battleSystem; //A reference to our battleSystem script in our scene
     public Color drawCol = Color.gray; // A colour you might want to set the battle log message to if it's a draw.
+    public Color winACol = Color.red;
+    public Color winBCol = Color.blue;
     private float fightAnimTime = 2; //An amount to wait between initiating the fight, and the fight begining, so we can see some of that sick dancing.
 
     /// <summary>
@@ -29,12 +31,8 @@ public class FightManager : MonoBehaviour
             Debug.LogWarning(" Simulate battle called; but char 1 or char 2 battle points is 0, most likely the logic has not be setup for this yet");
         }
 
-        // we probably want to compare our powerlevels...hope they aren't over 9000.
-        // we need to return a normalised (decimal) value....how much do you remember about percentages?
-        // don't forget that we are returning a float...but diving 2 ints...what happens?
-
-        Debug.LogWarning("Simulate battle called, but the logic hasn't been set up yet, so defaulting to 0");
-        return 0;
+        float powerDiff = (float)charOnePoints / (charOnePoints + charTwoPoints);
+        return powerDiff;
     }
 
 
@@ -60,12 +58,33 @@ public class FightManager : MonoBehaviour
         yield return new WaitForSeconds(fightAnimTime);
 
         // We need to do some logic hear to check who wins based on the battle points, we want to handle team A winning, team B winning and draw scenarios.
+        float powerDiff = (float)teamABattlePoints / (teamABattlePoints + teamBBattlePoints);
 
         // by default we set the winner to be character a, for defeated we set it to B.
-        winner = teamACharacter;
-        defeated = teamBCharacter;
-        outcome = 0;// this really needs to be a fraction of the win vs the loser, but if it's a draw 0 is okay.
-        BattleLog.Log("Fight is a draw!", drawCol);
+        if (teamABattlePoints > teamBBattlePoints)
+        {
+            winner = teamACharacter;
+            defeated = teamBCharacter;
+            outcome = powerDiff;// this really needs to be a fraction of the win vs the loser, but if it's a draw 0 is okay.
+            winner.AddXP(5);
+            BattleLog.Log("Team A Wins!", winACol);
+        }
+        if (teamABattlePoints < teamBBattlePoints)
+        {
+            winner = teamBCharacter;
+            defeated = teamACharacter;
+            outcome = powerDiff;// this really needs to be a fraction of the win vs the loser, but if it's a draw 0 is okay.
+            winner.AddXP(5);
+            BattleLog.Log("Team B Wins!", winBCol);
+            
+        }
+        if (teamABattlePoints == teamBBattlePoints)
+        {
+            winner = null;
+            defeated = null;
+            outcome = 0;// this really needs to be a fraction of the win vs the loser, but if it's a draw 0 is okay.
+            BattleLog.Log("Tie!", drawCol);
+        }
 
         Debug.LogWarning("Attack called, may want to use the BattleLog.Log() to report the dancers and the outcome of their dance off.");
 
