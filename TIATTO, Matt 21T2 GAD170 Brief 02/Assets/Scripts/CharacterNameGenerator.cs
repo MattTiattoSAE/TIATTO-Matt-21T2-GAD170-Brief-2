@@ -11,7 +11,7 @@ public class CharacterNameGenerator : MonoBehaviour
 {
  
     [Header("Possible first names")]
-    private List<string> firstNames; // These appear in the inspector, you should be assigning names to these in the inspector.
+    private List<string> firstNames; 
     [Header("Possible last names")]
     private List<string> lastNames;
     [Header("Possible nicknames")]
@@ -28,6 +28,7 @@ public class CharacterNameGenerator : MonoBehaviour
     {
         Debug.LogWarning("Create Names Called");
         // we probably want to set our 4 lists to some default values
+        
     }
 
     /// <summary>
