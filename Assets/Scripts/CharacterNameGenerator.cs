@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Functions to complete:
-/// Create Names
-/// - Generate Names
-/// </summary>
 public class CharacterNameGenerator : MonoBehaviour
 {
     [Header("Possible first names")]
@@ -64,7 +59,7 @@ public class CharacterNameGenerator : MonoBehaviour
             string fullName = emptyName.GetFullCharacterName();
             names[i] = emptyName;
             Debug.Log(fullName);
-        }
+        } 
 
         //Returns an array of names that we just created.
         return names;

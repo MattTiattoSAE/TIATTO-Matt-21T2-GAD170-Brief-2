@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Functions to complete:
-/// - Simulate Battle
-/// - Attack
-/// </summary>
 public class FightManager : MonoBehaviour
 {
     public BattleSystem battleSystem; //A reference to our battleSystem script in our scene

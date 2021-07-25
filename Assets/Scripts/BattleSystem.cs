@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Functions to complete:
-/// - Do Round
-/// - Fight Over
-/// </summary>
 public class BattleSystem : MonoBehaviour
 {
     public DanceTeam teamA,teamB; //References to TeamA and TeamB
@@ -111,7 +106,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(fightCompletedWaitTime);
         teamA.DisableWinEffects();
         teamB.DisableWinEffects();
-        Debug.LogWarning("HandleFightOver called, may need to prepare or clean dancers or teams and checks before doing GameEvents.RequestFighters()");
+        Debug.LogWarning("HandleFightOver called");
         RequestRound();
     }
 }

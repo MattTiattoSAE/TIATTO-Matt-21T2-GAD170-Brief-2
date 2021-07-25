@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Functions to complete:
-/// - Deal Damage
-/// </summary>
 public class Character : MonoBehaviour
 {
     public CharacterName charName; // This is a reference to an instance of the characters name script.
